@@ -3,13 +3,18 @@ import { FC } from "hono/jsx"
 import MetaHeader from "../components/MetaHeader"
 import Footer from "./Footer"
 
+type Props = {
+  title?: string
+}
+
 
 const BaseLayout: FC = (props) => {
+  const { title = "This is test" } = props
     return (
     <>
      <html>
        <head>
-         <MetaHeader title="Thisistest"/>
+         <MetaHeader title={title}/>
        </head>
        <body>
        <main>

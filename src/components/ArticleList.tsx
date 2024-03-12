@@ -13,20 +13,16 @@ const ArticleList: FC< {posts: Posts[]} > = (props) => {
     const { posts } = props
     return(
         <>
-        <section>
         {
             posts.map((post) => (
                 <p>
                 <a
-                    href={`/blog/${post.id}`}
+                    href={`/blog/${post.slug}`}
                 >{post.title}</a><br/>
-                   {post.body}
-                
+                   {post.description}
                 </p>
             ))
         }
-        </section>
-
         </>
     )
 }

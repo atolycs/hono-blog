@@ -1,8 +1,11 @@
 import { Hono } from 'hono'
 import { renderer } from './renderer'
-import { getPosts } from './lib/post'
+import { getPosts, getPost } from './lib/post'
 import BaseLayout from './Layout/BaseLayout'
 import ArticleList from './components/ArticleList'
+import ssgBuild from '@hono/vite-ssg'
+import PostBlog from './Layout/PostBlog'
+import { ssgParams } from 'hono/ssg'
 
 const app = new Hono()
 
@@ -46,4 +49,25 @@ app.get("/blog", async (c) => {
 })
 
 
+app.get(
+  "/blog/:slug",
+  ssgParams(async () => {
+    const posts = await getPosts()
+    return posts.map((post) => {
+      return {
+        slug: post.slug
+      }
+     })
+    }),
+
+  async(c) => {
+    const markdown_article = await getPost(c.req.param("slug"))
+
+    return c.render(
+      <BaseLayout title={`${markdown_article.title} - This is test`}>
+        <PostBlog post={markdown_article} />
+      </BaseLayout>
+    )
+  }
+)
 export default app

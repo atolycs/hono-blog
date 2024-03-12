@@ -18,6 +18,7 @@ type Post = {
     editDate?: string;
     description: string;
     body: string;
+    pre_text?: string;
     heroImage?: string;
 }
 
@@ -48,6 +49,7 @@ export const getPosts = async () => {
                 .use(rehypeStringify, { allowDangerousHtml: true })
                 .use(remarkGfm)
                 .process(content)
+            //console.log(result)
             const post: Post = {
                 slug: path.parse(path.basename(filePath)).name,
                 title: (result.data.frontMatter as Post).title,
@@ -64,4 +66,38 @@ export const getPosts = async () => {
     })
 
     return posts;
+}
+
+
+export const getPost = async (slug: string) => {
+    const filePath = path.join(postDir, `${slug}.md`);
+    const content = fs.readFileSync(filePath, { encoding: "utf-8" })
+    const result = await remark()
+        .use(remarkParse)
+        .use(remarkFrontmatter, [
+            {
+                type: "yaml",
+                marker: "-",
+                anywhere: false
+            }
+        ])
+        .use(remarkExtractFrontmatter, {
+            yaml: yaml.parse,
+            name: "frontMatter",
+        })
+        .use(remarkGfm)
+        .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeStringify, { allowDangerousHtml: true })
+        .use(remarkGfm)
+        .process(content)
+    const post: Post = {
+        slug: path.parse(path.basename(filePath)).name,
+        title: (result.data.frontMatter as Post).title,
+        pubDate: (result.data.frontMatter as Post)?.pubDate,
+        editDate: (result.data.frontMatter as Post)?.editDate,
+        description: (result.data.frontMatter as Post)?.description,
+        body: result.toString()
+    }
+
+    return post
 }
