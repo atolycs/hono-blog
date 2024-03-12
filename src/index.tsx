@@ -1,6 +1,8 @@
 import { Hono } from 'hono'
 import { renderer } from './renderer'
+import { getPosts } from './lib/post'
 import BaseLayout from './Layout/BaseLayout'
+import ArticleList from './components/ArticleList'
 
 const app = new Hono()
 
@@ -31,5 +33,17 @@ app.get('/', (c) => {
     </BaseLayout>
   )
 })
+
+
+app.get("/blog", async (c) => {
+  const posts = await getPosts()
+
+  return c.render(
+    <BaseLayout>
+      <ArticleList posts={posts} />
+    </BaseLayout>
+  )
+})
+
 
 export default app

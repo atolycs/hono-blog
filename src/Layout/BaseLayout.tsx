@@ -7,15 +7,17 @@ import Footer from "./Footer"
 const BaseLayout: FC = (props) => {
     return (
     <>
-    <html>
-      <head>
-        <MetaHeader title="Thisistest"/>
-      </head>
-      <main>
-        {props.children}
-      </main>
-      <Footer/>
-    </html>
+     <html>
+       <head>
+         <MetaHeader title="Thisistest"/>
+       </head>
+       <body>
+       <main>
+         {props.children}
+       </main>
+       <Footer/>
+       </body>
+     </html>
     </>
   )
 }

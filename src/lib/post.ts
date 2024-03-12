@@ -59,7 +59,6 @@ export const getPosts = async () => {
             return post;
         })
     )
-    console.log(posts)
     posts.sort((a,b) => {
         return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime();
     })
