@@ -1,12 +1,11 @@
 import { FC } from "hono/jsx";
-import MetaHeader from "../components/MetaHeader";
 
 const PostBlog: FC = async (props) => {
     return (
         <>
-        <MetaHeader title={`${props.post.title} - This is test`} />
         <main>
-            {props.post.body}
+            <h2>{props.article_title}</h2>
+            {props.children}
         </main>
         </>
     )

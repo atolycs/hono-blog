@@ -64,9 +64,13 @@ app.get(
     const markdown_article = await getPost(c.req.param("slug"))
 
     return c.render(
+      <>
       <BaseLayout title={`${markdown_article.title} - This is test`}>
-        <PostBlog post={markdown_article} />
+        <PostBlog article_title={markdown_article.title}>
+          {markdown_article.body}
+        </PostBlog>
       </BaseLayout>
+      </>
     )
   }
 )
