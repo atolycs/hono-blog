@@ -6,9 +6,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [
     //build(),
+    ssg({ entry: 'src/index.tsx'}),
     devServer({
       entry: 'src/index.tsx'
-    }),
-    ssg({ entry: 'src/index.tsx'})
+    })
   ]
 })

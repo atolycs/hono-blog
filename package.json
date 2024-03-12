@@ -7,6 +7,10 @@
     "deploy": "$npm_execpath run build && wrangler pages deploy dist"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "framer-motion": "^11.0.8",
     "hono": "^4.0.10"
   },
   "devDependencies": {
@@ -14,6 +18,11 @@
     "@hono/vite-cloudflare-pages": "^0.2.4",
     "@hono/vite-dev-server": "^0.9.0",
     "@hono/vite-ssg": "^0.1.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
     "rehype-stringify": "^10.0.0",
     "remark": "^15.0.1",
     "remark-extract-frontmatter": "^3.2.0",
